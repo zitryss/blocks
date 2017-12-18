@@ -15,21 +15,18 @@ type blocks struct {
 	data []int
 }
 
-// New abc
 func New() *blocks {
 	return &blocks{
 		data: make([]int, 80),
 	}
 }
 
-// Reset abc
 func (b *blocks) Reset() {
 	b.m.Lock()
 	defer b.m.Unlock()
 	b.data = make([]int, len(b.data))
 }
 
-// SetSize abc
 func (b *blocks) SetSize(size int) error {
 	if size < 1 {
 		return errors.New("size should be a positive number")
@@ -45,7 +42,6 @@ func (b *blocks) SetSize(size int) error {
 	return nil
 }
 
-// Add abc
 func (b *blocks) Add(num int) {
 	b.m.Lock()
 	defer b.m.Unlock()
@@ -53,13 +49,11 @@ func (b *blocks) Add(num int) {
 	b.data = append(b.data, num)
 }
 
-// Draw abc
 func (b *blocks) Draw() error {
 	_, err := fmt.Printf("\r%s", b)
 	return err
 }
 
-// String abc
 func (b *blocks) String() string {
 	b.m.Lock()
 	defer b.m.Unlock()
