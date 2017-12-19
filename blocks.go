@@ -1,3 +1,4 @@
+// Package blocks implements interactive conversion from numeric data to the block chart.
 package blocks
 
 import (
@@ -13,18 +14,21 @@ type blocks struct {
 	data []int
 }
 
+// New returns an instance of the block type which has the default size of 80 elements.
 func New() *blocks {
 	return &blocks{
 		data: make([]int, 80),
 	}
 }
 
+// Reset clears the previous given data.
 func (b *blocks) Reset() {
 	b.m.Lock()
 	defer b.m.Unlock()
 	b.data = make([]int, len(b.data))
 }
 
+// SetSize changes the amount of block elements given to the output.
 func (b *blocks) SetSize(size int) error {
 	if size < 1 {
 		return errors.New("size should be a positive number")
@@ -40,6 +44,7 @@ func (b *blocks) SetSize(size int) error {
 	return nil
 }
 
+// Add saves the data for the later output and acts as sliding window if the slice is full.
 func (b *blocks) Add(num int) {
 	b.m.Lock()
 	defer b.m.Unlock()
@@ -47,11 +52,13 @@ func (b *blocks) Add(num int) {
 	b.data = append(b.data, num)
 }
 
+// Draw prints the data as block elements and puts the carriage to the beginning of a line.
 func (b *blocks) Draw() error {
 	_, err := fmt.Printf("\r%s", b)
 	return err
 }
 
+// String returns a string representation of data as block elements.
 func (b *blocks) String() string {
 	b.m.Lock()
 	defer b.m.Unlock()
