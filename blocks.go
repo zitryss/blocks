@@ -3,14 +3,12 @@ package blocks
 import (
 	"errors"
 	"fmt"
-	"io"
 	"sync"
 )
 
 var elements = [...]rune{'▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'}
 
 type blocks struct {
-	w    io.Writer
 	m    sync.Mutex
 	data []int
 }
