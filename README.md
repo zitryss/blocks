@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/zitryss/blocks.svg?branch=master)](https://travis-ci.org/zitryss/blocks)
 [![Coverage](http://gocover.io/_badge/github.com/zitryss/blocks)](https://gocover.io/github.com/zitryss/blocks)
-<!---[![Go Report Card](https://goreportcard.com/badge/github.com/zitryss/blocks)](https://goreportcard.com/report/github.com/zitryss/blocks)--->
+[![Go Report Card](https://goreportcard.com/badge/github.com/zitryss/blocks)](https://goreportcard.com/report/github.com/zitryss/blocks)
 
 Package blocks implements interactive conversion from numeric data to the block chart. Inspired by [spark](https://github.com/holman/spark).
 
