@@ -4,6 +4,9 @@ package blocks
 import (
 	"errors"
 	"fmt"
+	"log"
+	"os"
+	"os/exec"
 	"sync"
 )
 
@@ -14,11 +17,25 @@ type blocks struct {
 	data []int
 }
 
-// New returns an instance of the block type which has the default size of 80 elements.
+// New returns an instance of the block type. Size is scaled to the terminal.
 func New() *blocks {
+	_, columns := terminalSizes()
 	return &blocks{
-		data: make([]int, 80),
+		data: make([]int, columns),
 	}
+}
+
+func terminalSizes() (int, int) {
+	cmd := exec.Command("stty", "size")
+	cmd.Stdin = os.Stdin
+	out, err := cmd.Output()
+	if err != nil {
+		log.Print(err)
+		return 0, 80
+	}
+	rows, columns := 0, 0
+	fmt.Sscan(string(out), &rows, &columns)
+	return rows, columns
 }
 
 // Reset clears the previous given data.
