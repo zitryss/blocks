@@ -1,3 +1,5 @@
+// +build linux darwin
+
 // Package blocks implements interactive conversion from numeric data to the block chart.
 package blocks
 
